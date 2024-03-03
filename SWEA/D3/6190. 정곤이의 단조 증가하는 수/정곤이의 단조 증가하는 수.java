@@ -5,7 +5,6 @@ import java.util.StringTokenizer;
 public class Solution {
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
 		int T = Integer.parseInt(br.readLine());
 		
 		for(int tc = 1; tc <= T; tc++) {
@@ -20,24 +19,21 @@ public class Solution {
 			int max = 0;
 			for(int i = 0; i < N - 1; i++) {
 				for(int j = i + 1; j < N; j++) {
-					int multi = arr[i] * arr[j];
+					int mul = arr[i] * arr[j];
+					String str = String.valueOf(mul);
 					
-					String mulstr = String.valueOf(multi);
+					char prev = str.charAt(0);
 					boolean increasing = true;
-					char prev = mulstr.charAt(0);
-					
-					for(int d = 1; d < mulstr.length(); d++) {
-						char curr = mulstr.charAt(d);
-						
-						if(curr < prev) {
+					for(int x = 1; x < str.length(); x++) {
+						char curr = str.charAt(x);
+						if(prev > curr) {
 							increasing = false;
 							break;
 						}
 						prev = curr;
 					}
-					
-					if(increasing == true && max < multi) {
-						max = multi;
+					if(increasing == true && max < mul) {
+						max = mul;
 					}
 					if(max == 0) {
 						max = -1;
