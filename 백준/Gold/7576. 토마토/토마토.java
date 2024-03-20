@@ -6,14 +6,19 @@ import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main {
+	static int[][] arr;
+	static boolean[][] visited;
+	static int[] dr = { -1, 0, 1, 0 };
+	static int[] dc = { 0, 1, 0, -1 };		
+	static int day;
+	static int cnt;
+	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int M = Integer.parseInt(st.nextToken());
 		int N = Integer.parseInt(st.nextToken());
-		int[][] arr = new int[N][M];
-		int[] dr = { -1, 0, 1, 0 };
-		int[] dc = { 0, 1, 0, -1 };		
+		arr = new int[N][M];
 		
 		for(int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -23,10 +28,20 @@ public class Main {
 		}
 //		System.out.println(Arrays.deepToString(arr));
 		
+		bfs(arr, visited, M, N);
+		
+		if(cnt == 0) {
+			System.out.println(day);
+		} else {
+			System.out.println(-1);
+		}
+	}
+	
+	static void bfs(int[][] arr, boolean[][] visited, int M, int N) {
 		Queue<int[]> q = new LinkedList<>();		
-		boolean[][] visited = new boolean[N][M];
-		int day = -1; // 다 익는데 걸리는 시간, while문에 들어갈때 +1 되기 때문에 -1로 초기화
-		int cnt = 0; // 안익은 토마토 수
+		visited = new boolean[N][M];
+		day = -1; // 다 익는데 걸리는 시간, while문에 들어갈때 +1 되기 때문에 -1로 초기화
+		cnt = 0; // 안익은 토마토 수
 		
 		for(int i = 0; i < N; i++) {
 			for(int j = 0; j < M; j++) {
@@ -34,11 +49,11 @@ public class Main {
 					visited[i][j] = true;
 					q.offer(new int[] {i, j});
 				} else if(arr[i][j] == 0) {
-					cnt++;
+					cnt++;					
 				}
 			}
 		}
-					
+		
 		while(!q.isEmpty()) {
 			int size = q.size();
 			for(int i = 0; i < size; i++) {
@@ -59,12 +74,6 @@ public class Main {
 				}
 			}
 			day++;
-		}
-		
-		if(cnt == 0) {
-			System.out.println(day);
-		} else {
-			System.out.println(-1);
 		}
 	}
 }
