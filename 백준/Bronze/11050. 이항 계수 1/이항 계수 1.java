@@ -8,15 +8,14 @@ public class Main {
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		int N = Integer.parseInt(st.nextToken());
 		int K = Integer.parseInt(st.nextToken());
-		int answer = factorial(N) / ((factorial(K)) * (factorial(N - K)));
-		System.out.println(answer);
-	}
-	
-	static int factorial(int X) {
-		if(X <= 1) {
-			return 1;
-		} else {
-			return X * factorial(X - 1);
+		int top = 1;
+		int bottom = 1;
+		
+		for(int i = 0; i < K; i++) {
+			top *= N - i;
+			bottom *= K - i;
 		}
+		
+		System.out.println(top / bottom);
 	}
 }
