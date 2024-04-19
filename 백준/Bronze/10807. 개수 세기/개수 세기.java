@@ -1,29 +1,27 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
-	public static void main(String[] args) throws Exception {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		
-		int size = Integer.parseInt(br.readLine());
-		int[] nums = new int[size];
-		
-		StringTokenizer st = new StringTokenizer(br.readLine());
-
-		for(int i = 0; i < size; i++) {
-			nums[i] = Integer.parseInt(st.nextToken());
-		}
-		
-		int target = Integer.parseInt(br.readLine());
-		int count = 0;
-		
-		for(int i = 0; i < nums.length; i++) {
-			if(nums[i] == target) {
-				count++;
-			}
-		}
-		
-		System.out.println(count);
-	}
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(); 
+        
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) {
+           arr[i]=sc.nextInt();
+        }
+        
+        int m = sc.nextInt();
+        int cnt=0;
+        
+        
+        for (int i = 0; i < n; i++) {
+            if(arr[i]==m) {
+            	cnt++;
+            }
+         }
+System.out.println(cnt);
+       
+    }
 }
