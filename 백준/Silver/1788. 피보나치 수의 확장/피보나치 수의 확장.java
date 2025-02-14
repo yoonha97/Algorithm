@@ -1,17 +1,10 @@
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
-	static int[] memo = new int[1000001];
-
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
 		sc.close();
-
-		Arrays.fill(memo, -1);
-		memo[0] = 0;
-		memo[1] = 1;
 
 		if (N == 0) {
 			System.out.println(0);
@@ -20,7 +13,15 @@ public class Main {
 		}
 
 		int absN = Math.abs(N);
-		int fib = fibo(absN);
+		int[] dp = new int[absN + 1];
+		dp[0] = 0;
+		dp[1] = 1;
+
+		for (int i = 2; i <= absN; i++) {
+			dp[i] = (dp[i - 1] + dp[i - 2]) % 1000000000;
+		}
+
+		int fib = dp[absN];
 
 		if (N < 0 && (N % 2 == 0)) {
 			fib = -fib;
@@ -35,12 +36,5 @@ public class Main {
 		}
 
 		System.out.println(Math.abs(fib));
-	}
-
-	private static int fibo(int n) {
-		if (memo[n] != -1)
-			return memo[n];
-
-		return memo[n] = (fibo(n - 1) + fibo(n - 2)) % 1000000000;
 	}
 }
